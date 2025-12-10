@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Todo.Core
@@ -25,5 +26,31 @@ namespace Todo.Core
             StringComparison.OrdinalIgnoreCase));
 
         public int Count => _items.Count;
+
+        public void Save(string path)
+        {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+            string json = JsonSerializer.Serialize(_items, options);
+            File.WriteAllText(path, json);
+        }
+
+        public void Load(string path)
+        {
+            if (!File.Exists(path))
+                return;
+
+            string json = File.ReadAllText(path);
+            var loaded = JsonSerializer.Deserialize<List<TodoItem>>(json);
+
+            if (loaded != null)
+            {
+                _items.Clear();
+                _items.AddRange(loaded);
+            }
+        }
     }
 }
