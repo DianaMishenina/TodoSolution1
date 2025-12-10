@@ -9,24 +9,23 @@ namespace Todo.Core
 {
     public class TodoItem
     {
-        public Guid Id { get; init; } = Guid.NewGuid();
+        [JsonInclude]
+        public Guid Id { get; init; }
+        [JsonInclude]
         public string Title { get; private set; } = string.Empty;
+        [JsonInclude]
         public bool IsDone { get; private set; }
 
         public TodoItem(string title)
         {
             Title = title?.Trim() ?? throw new ArgumentNullException(nameof(title));
-            if (string.IsNullOrWhiteSpace(Title))
-                throw new ArgumentException("Title cannot be empty or whitespace", nameof(title));
         }
 
         [JsonConstructor]
         public TodoItem(Guid id, string title, bool isDone)
         {
             Id = id;
-            Title = title?.Trim() ?? throw new ArgumentNullException(nameof(title));
-            if (string.IsNullOrWhiteSpace(Title))
-                throw new ArgumentException("Title cannot be empty or whitespace", nameof(title));
+            Title = title;
             IsDone = isDone;
         }
 
@@ -34,8 +33,8 @@ namespace Todo.Core
         public void MarkUndone() => IsDone = false;
         public void Rename(string newTitle)
         {
-            if (string.IsNullOrWhiteSpace(newTitle))
-                throw new ArgumentException("Title required", nameof(newTitle));
+            if (string.IsNullOrWhiteSpace(newTitle)) 
+                throw new ArgumentException("Title required", nameof(newTitle)); 
             Title = newTitle.Trim();
         }
     }
