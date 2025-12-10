@@ -9,8 +9,8 @@ namespace Todo.Core
 {
     public class TodoItem
     {
-        public Guid Id { get; } = Guid.NewGuid();
-        public string Title { get; private set; }
+        public Guid Id { get; init; } = Guid.NewGuid();
+        public string Title { get; private set; } = string.Empty;
         public bool IsDone { get; private set; }
 
         public TodoItem(string title)
@@ -30,7 +30,8 @@ namespace Todo.Core
         public void MarkUndone() => IsDone = false;
         public void Rename(string newTitle)
         {
-            if (string.IsNullOrWhiteSpace(newTitle)) throw new ArgumentException("Title required", nameof(newTitle)); 
+            if (string.IsNullOrWhiteSpace(newTitle)) 
+                throw new ArgumentException("Title required", nameof(newTitle)); 
             Title = newTitle.Trim();
         }
     }
