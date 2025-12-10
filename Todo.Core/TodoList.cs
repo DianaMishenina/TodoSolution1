@@ -32,7 +32,6 @@ namespace Todo.Core
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
             string json = JsonSerializer.Serialize(_items, options);
             File.WriteAllText(path, json);
