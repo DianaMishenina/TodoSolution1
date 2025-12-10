@@ -9,18 +9,20 @@ namespace Todo.Core
 {
     public class TodoItem
     {
-        public Guid Id { get; init; } = Guid.NewGuid();
         [JsonInclude]
-        public string Title { get; private set; } = string.Empty;
+        public Guid Id { get; private set; }
+        [JsonInclude]
+        public string Title { get; private set; };
         [JsonInclude]
         public bool IsDone { get; private set; }
 
         public TodoItem(string title)
         {
+            Id = Guid.NewGuid();
             Title = title?.Trim() ?? throw new ArgumentNullException(nameof(title));
         }
 
-        [JsonConstructor]
+        //[JsonConstructor]
         public TodoItem(Guid id, string title, bool isDone)
         {
             Id = id;
