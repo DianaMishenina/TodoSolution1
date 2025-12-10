@@ -10,6 +10,8 @@
 	<Authors>Diana</Authors>
 	<Company>io.natk</Company>
 	<Description>Simple Todo core library (for practice)</Description>
+	<RepositoryUrl>https://github.com/DianaMishenina/TodoSolution1.git</RepositoryUrl>
+	<RepositoryType>git</RepositoryType>
 	<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
