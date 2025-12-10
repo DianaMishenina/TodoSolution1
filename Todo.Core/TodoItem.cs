@@ -10,7 +10,9 @@ namespace Todo.Core
     public class TodoItem
     {
         public Guid Id { get; init; } = Guid.NewGuid();
+        [JsonInclude]
         public string Title { get; private set; } = string.Empty;
+        [JsonInclude]
         public bool IsDone { get; private set; }
 
         public TodoItem(string title)
